@@ -19,8 +19,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-load_dotenv(BASE_DIR / 'blog/.env')
-
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -83,14 +82,21 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': os.getenv('DATABSE'),
+#        'USER': os.getenv('USERNAME'),
+#        'PASSWORD': os.getenv('PASSWORD'),
+#        'HOST': os.getenv('HOST'),
+#        'PORT': os.getenv('POST')
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DATABSE'),
-        'USER': os.getenv('USERNAME'),
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': os.getenv('HOST'),
-        'PORT': os.getenv('POST')
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / str(os.getenv('DATABSE') + '.sqlite3'),
     }
 }
 

@@ -19,7 +19,7 @@
 
   <div>
     {% if request.user.is_authenticated %}
-      <button id="add-offer-button">Add new Offer</button>
+      <a class="add-offer-button" href="{% url 'add-offer' %}">Add new offer</a>
     {% endif %}
 
     <div>
