@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -96,7 +97,7 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / str(os.getenv('DATABSE') + '.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, os.getenv('DATABSE') + '.sqlite3'),
     }
 }
 
@@ -152,5 +153,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Render form on website w
 LOGIN_REDIRECT_URL = '/'
 
 
-import django_on_heroku
 django_on_heroku.settings(locals())
