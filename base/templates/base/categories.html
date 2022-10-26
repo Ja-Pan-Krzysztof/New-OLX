@@ -1,0 +1,12 @@
+{% if categories %}
+	{% for category in categories %}
+
+		<ul>
+			<li>{{ category }}</li>
+		</ul>
+	{% endfor %}
+
+{% else %}
+	<h1>No content do display.</h1>
+	
+{% endif %}

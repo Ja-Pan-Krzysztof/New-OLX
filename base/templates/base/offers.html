@@ -1,0 +1,15 @@
+{% if offers %}
+	{% for offer in offers %}
+		<div class="offer-list">
+			<p>{{ offer.host }} - {{ offer.created|date:"Y-m-d / H:i" }}</p>
+			<header>{{ offer.topic }}</header>
+			<div>{{ offer.description }}</div>
+			<div>{{ offer.price }}zł</div>
+
+		</div>
+	{% endfor %}
+
+{% else %}
+	<p>No content to display</p>
+
+{% endif %}

@@ -1,0 +1,9 @@
+{% for offer in offers|dictsort:"views"|slice:":5" %}
+	<div class="offer-list">
+			<p>{{ offer.host }} - {{ offer.created|date:"Y-m-d / H:i" }}</p>
+			<header>{{ offer.topic }}</header>
+			<div>{{ offer.description }}</div>
+			<div>{{ offer.price }}zł</div>
+
+	</div>
+{% endfor %}
