@@ -30,7 +30,7 @@
 					data.append('username', username.value)
 					data.append('password1', password1.value)
 					data.append('password2', password2.value)
-					data.append('csrfmiddlewaretoken', {{ csrf_token }})
+					data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
 
 					axios({
 						method: 'POST',
