@@ -3,19 +3,56 @@
 {% block content %}
 
 <div>
-	<form action="" method="POST">
-		{% csrf_token %}
+	<label for="username">Username:</label>
+	<input type="text" placeholder="Enter username" id="username" name="username" value="admin">
 
-		<label for="username">Username:</label>
-		<input type="text" placeholder="Enter username" id="username" name="username" value="admin">
+	<label for="password">Password</label>
+	<input type="password" name="password" id="password" placeholder="Enter password" value="admin">
 
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password" placeholder="Enter password" value="admin">
-
-		<input type="submit" value="Login">
-	</form>
+	<input type="button" value="Login" id="submit">
 	<p>Haven't signed up yet?</p>
 	<a href="{% url 'sign-up' %}">Sign Up</a>
 </div>
+
+<script type="text/javascript">	
+	let username = document.getElementById('username');
+	let password = document.getElementById('password');
+
+	let submit = document.getElementById('submit');
+
+
+	submit.addEventListener('click', send_login);
+
+	function send_login() {
+		let data = new FormData();
+
+		data.append('username', username.value)
+		data.append('password', password.value)
+		data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+		axios({
+			method: 'POST',
+			url: window.location.origin + '/account/login/',
+			data: data
+		})
+			.then(response => {
+				body = response.data['login'];
+				
+				if(body == 2) {
+					div_message.innerHTML = 'Username does not exist.'
+				}
+
+				if(body == 1) {
+					div_message.innerHTML = 'Invalid username or password'
+				}
+
+				if(body == 0) {
+					div_message.innerHTML = 'Success'
+					window.location = '/';
+				}
+			})
+			.catch(errors => console.log(errors))
+	}
+</script>
 
 {% endblock %}

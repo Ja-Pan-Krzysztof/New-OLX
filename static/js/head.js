@@ -1,0 +1,1 @@
+let div_message = document.getElementById('messages');

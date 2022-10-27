@@ -3,14 +3,71 @@
 {% block content %}
 
 <div>
-	<form action="" method="POST">
-		{% csrf_token %}
 		{{ form.as_p }}
 
-		<input type="submit" value="register">
+		<input type="button" value="register" id="submit">
 	</form>
 	<p>Already signed up yet?</p>
 	<a href="{% url 'login' %}">Login</a>
 </div>
+
+<script>
+	let username = document.getElementById('id_username');
+	let password1 = document.getElementById('id_password1');
+	let password2 = document.getElementById('id_password2');
+	let messages = document.getElementById('messages');
+
+	submit.addEventListener('click', send_signUp);
+
+	function send_signUp() {
+		if(!username.value < 8) {
+			if(!password1.value < 8) {
+				if(password1 != password2) {
+				
+
+					let data = new FormData();
+
+					data.append('username', username.value)
+					data.append('password1', password1.value)
+					data.append('password2', password2.value)
+					data.append('csrfmiddlewaretoken', {{ csrf_token }})
+
+					axios({
+						method: 'POST',
+						url: window.location.origin + '/account/sign-up/',
+						data: data
+					})
+						.then(response => {
+							body = response.data['signup'];
+
+							if(body == 1) {
+								div_message.innerHTML = 'Invalid data';
+							}
+
+							if(body == 0) {
+								div_message.innerHTML = 'Success';
+								window.location = '/';
+							}
+						})
+						.catch(errors => console.log(errors))
+				}
+
+				else {
+					messages.innerHTML = "Passwords are not same";
+				}
+			}
+
+			else {
+				messages.innerHTML = "Password is short";
+			}
+		}
+
+		else {
+			messages.innerHTML = "Username is short";
+		}
+
+	}
+
+</script>
 
 {% endblock %}

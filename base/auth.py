@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 def login_page(request):
@@ -14,17 +15,19 @@ def login_page(request):
             User.objects.get(username=username)
 
         except:
-            messages.error(request, 'User doesn\'t exist.')
+            return JsonResponse({'login': 2})
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
 
-            return redirect('home')
+            return JsonResponse({'login': 0})
 
         else:
-            messages.error(request, 'Username or password is invalid !')
+            messages.error(request, '')
+
+            return JsonResponse({'login': 1})
 
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -43,7 +46,7 @@ def login_page(request):
 def logout_page(request):
     logout(request)
 
-    return redirect('home')
+    return JsonResponse({'logout': 0})
 
 
 def sigh_up_page(request):
@@ -64,7 +67,8 @@ def sigh_up_page(request):
             return redirect('home')
 
         else:
-            messages.error(request, 'Error in form !')
+            messages.error(request, 'Invalid data')
+            return redirect('sign-up')
 
     if request.method == 'GET':
         form = UserCreationForm()
