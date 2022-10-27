@@ -20,11 +20,6 @@
 	submit.addEventListener('click', send_signUp);
 
 	function send_signUp() {
-		if(!username.value < 8) {
-			if(!password1.value < 8) {
-				if(password1 != password2) {
-				
-
 					let data = new FormData();
 
 					data.append('username', username.value)
@@ -40,6 +35,8 @@
 						.then(response => {
 							body = response.data['signup'];
 
+							console.log(body)
+
 							if(body == 1) {
 								div_message.innerHTML = 'Invalid data';
 							}
@@ -51,22 +48,6 @@
 						})
 						.catch(errors => console.log(errors))
 				}
-
-				else {
-					messages.innerHTML = "Passwords are not same";
-				}
-			}
-
-			else {
-				messages.innerHTML = "Password is short";
-			}
-		}
-
-		else {
-			messages.innerHTML = "Username is short";
-		}
-
-	}
 
 </script>
 

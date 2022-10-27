@@ -64,11 +64,10 @@ def sigh_up_page(request):
 
             login(request, user)
 
-            return redirect('home')
+            return JsonResponse({'signup': 0})
 
         else:
-            messages.error(request, 'Invalid data')
-            return redirect('sign-up')
+            return JsonResponse({'signup': 1})
 
     if request.method == 'GET':
         form = UserCreationForm()
