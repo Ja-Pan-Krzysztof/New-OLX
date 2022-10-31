@@ -6,16 +6,42 @@
   </div>
 
   <div class="nav-item nav-search">
-    <input type="text" placeholder="Search..." name="search" id="nav-search">
+    <center>
+      <input type="text" placeholder="Search..." name="search" id="nav-search">
+      <a href="" class="dropdown-link" style="position: relative; top: 20px;">
+        <svg
+   width="21mm"
+   height="14.8mm"
+   viewBox="0 0 105 74"
+   id="svg1250">
+    <circle
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.28562;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="path1045"
+       cx="68.516029"
+       cy="27.930508"
+       r="14.220693" />
+    <rect
+       style="display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.46932;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="rect1047"
+       width="2.8090255"
+       height="30.548153"
+       x="55.34486"
+       y="-31.018927"
+       transform="rotate(61.800844)" />
+  </g>
+</svg>
+              </a>
+    </center>
   </div>
 
   {% if request.user.is_authenticated %}
     <div class="nav-item nav-login">
       <input type="button" id="submit" value="Logout">
-      <script>
-        let submit = document.getElementById('submit');
 
-        submit.addEventListener('click', send_logout);
+      <script>
+        let logout = document.getElementById('submit');
+
+        logout.addEventListener('click', send_logout);
 
         function send_logout() {
           let data = new FormData();

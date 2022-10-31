@@ -12,7 +12,7 @@ class UserForm(ModelForm):
 class OfferForm(ModelForm):
     class Meta:
         model = Offer
-        fields = ['topic', 'category', 'tags', 'description', 'image', 'price']
+        fields = ['topic', 'category', 'description', 'image', 'price']
 
 
 

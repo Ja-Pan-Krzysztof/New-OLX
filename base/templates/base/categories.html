@@ -1,8 +1,7 @@
 {% if categories %}
 	{% for category in categories %}
-
 		<ul>
-			<li>{{ category }}</li>
+			<li><a href="{% url 'offer-category' category %}">{{ category }}</a></li>
 		</ul>
 	{% endfor %}
 

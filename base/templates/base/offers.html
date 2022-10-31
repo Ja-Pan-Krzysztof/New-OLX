@@ -1,11 +1,33 @@
+{% load static %}
+
 {% if offers %}
 	{% for offer in offers %}
 		<div class="offer-list">
-			<p>{{ offer.host }} - {{ offer.created|date:"Y-m-d / H:i" }}</p>
-			<header>{{ offer.topic }}</header>
-			<div>{{ offer.description }}</div>
-			<div>{{ offer.price }}zł</div>
+			<div class="offer-list-left offer-list-item">
+				{% if offer.image %}
+					<img src="{{ request.scheme }}://{{ request.get_host }}/media/{{ offer.image }}">
+				
+				{% else %}
+					<img src="{{ request.scheme }}://{{ request.get_host }}/media/no-image.png">
+				
+				{% endif %}
+			</div>
+			<div class="offer-list-right offer-list-item">
+				<header>{{ offer.topic }}</header>
+				<div>{{ offer.description|truncatechars:255 }}</div>
 
+				<div style="text-align: right;">
+					{% if offer.price == 0.00 %}
+						<span style="font-weight: bold;">FREE</span>
+
+					{% else %}
+						<span style="font-weight: bold;">{{ offer.price }} zł</span>
+
+					{% endif %}
+					<br>
+					<span>{{ offer.host }} - {{ offer.created|date:"Y-m-d / H:i" }}</span>
+				</div>
+			</div>
 		</div>
 	{% endfor %}
 

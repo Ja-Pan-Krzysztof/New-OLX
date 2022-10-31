@@ -3,29 +3,26 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=80)
+    name = models.CharField(max_length=80)
 
     class Meta:
-        ordering = ['category']
+        ordering = ['name']
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Location(models.Model):
     voivodeship = models.CharField(max_length=50, null=False)
-    city = models.CharField(max_length=100, null=False)
-    stret = models.CharField(max_length=50, null=False)
-    house_number = models.SmallIntegerField(null=False)
 
     class Meta:
         verbose_name = 'Location'
         verbose_name_plural = 'Locations'
 
     def __str__(self):
-        return self.city
+        return self.voivodeship
 
 
 class Tags(models.Model):
@@ -42,13 +39,13 @@ class Tags(models.Model):
 class Offer(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     topic = models.CharField(max_length=50, null=False)
-    tags = models.ManyToManyField(Tags)
+    tags = models.ManyToManyField(Tags, null=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=False)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to='images/offer/')
+    image = models.ImageField(null=True, upload_to='offer/')
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
 
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
     particopants = models.ManyToManyField(User, related_name='particopants', blank=True)
     views = models.IntegerField(null=False, default=0)
@@ -56,7 +53,11 @@ class Offer(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.topic[:50]
+
     class Meta:
+        ordering = ['-updated', '-created']
         verbose_name = 'offer'
         verbose_name_plural = 'offers'
 

@@ -1,11 +1,100 @@
 {% extends 'main.html' %}
 
 {% block content %}
+	<div class="add-offer-list">
+		
 
 	<form action="" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" name="submit" value="submit">
+		<div class="offer-titles">
+			<div><header>Title</header></div>
+			<hr><br>
+			<div><header>Cagetory</header></div>
+			<hr><br>
+			<div><header>Description</header></div>
+			<hr><br>
+			<div><header>Image</header></div>
+			<hr><br>
+			<div><header>Price</header></div>
+			<hr><br>
+		</div>
+
+		<div class="offer-values">
+			<div>{{ form.topic }}</div>
+			<hr><br>
+			<div>{{ form.category }}</div>
+			<hr><br>
+			<div>{{ form.description }}</div>
+			<hr><br>
+			<div>{{ form.image }}</div>
+			<hr><br>
+			<div>{{ form.price }}</div>
+			<hr><br>
+		</div>
+
+		<div style="clear: both;">
+			<input type="submit" id="add_offer" value="Add Offer">
+		</div>
 	</form>
+
+	</div>
+	
+	<script type="text/javascript">
+		let submit = document.getElementById('add_offer');
+
+		let topic = document.getElementById('id_topic');
+		let category = document.getElementById('id_category');
+		let description = document.getElementById('id_description');
+		let image = document.getElementById('id_image');
+		let price = document.getElementById('id_price');
+		//let tags = document.getElementById('id_tags');
+		//let locationn = document.getElementById('id_location');
+
+		//submit.addEventListener('click', send_addOffer);
+
+		function send_addOffer() {
+			let data = new FormData();
+
+			data.append('topic', topic.value);
+			data.append('category', category.value);
+			data.append('description', description.value);
+			data.append('image', image.files[0].name);
+			data.append('price', price.value);
+			//data.append('tags', tags.value);
+			//data.append('location', locationn.value);
+			data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+			console.log(image.files[0]);
+
+			axios({
+				method: 'POST',
+				headers: {'Content-Type': 'multipart/form-data'},
+				url: '',
+				data: data
+			})
+				.then(response => {
+					body = response.data['addoffer'];
+					if(body == 5) {
+						div_message.innerHTML = 'Bad Location.';
+					}
+					if(body == 4) {
+						div_message.innerHTML = 'Topic is too long.';
+					}
+					if(body == 3) {
+						div_message.innerHTML = 'Bad Category';
+					}
+					if(body == 2) {
+						div_message.innerHTML = 'Bad tags';
+					}
+					if(body == 1) {
+						div_message.innerHTML = 'Invalid data';
+					}
+					if(body == 0) {
+						div_message.innerHTML = 'Success';
+						//window.location = '/';
+					}
+				})
+		}
+	</script>
 
 {% endblock %}

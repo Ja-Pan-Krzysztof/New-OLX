@@ -1,5 +1,6 @@
 images/
 *.sqlite3
+media/
 
 
 #official python gitignore
