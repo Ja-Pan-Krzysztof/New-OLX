@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from django.http import JsonResponse
 
+from .forms import SingUpUserForm
+
 import re
 
 
