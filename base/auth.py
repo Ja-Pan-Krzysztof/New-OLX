@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from django.http import JsonResponse
+
+import re
 
 
 def login_page(request):
@@ -52,25 +53,33 @@ def logout_page(request):
 def sigh_up_page(request):
     template_name = 'base/auth/sign_up.html'
 
-    context = None
-
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        username = request.POST['username']
+        email = request.POST['email']
+        pass1 = request.POST['password1']
+        pass2 = request.POST['password2']
 
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
+        if not pass1 == pass2:
+            return JsonResponse({'signup': 2})
 
-            login(request, user)
+        if not re.fullmatch(re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), email):
+            return JsonResponse({'signup': 3})
 
-            return JsonResponse({'signup': 0})
+        if not re.fullmatch(re.compile('^[a-zA-Z0-9_.-]+$'), username):
+            return JsonResponse({'signup': 4})
 
-        else:
-            return JsonResponse({'signup': 1})
+        Userr = get_user_model()
+        user = Userr.objects.create_user(username=username, password=pass1, email=email)
+        user.is_superuser = False
+        user.if_staff = False
+        user.save()
+        
+        login(request, user)
+
+        return JsonResponse({'signup': 0})
 
     if request.method == 'GET':
-        form = UserCreationForm()
+        form = SingUpUserForm()
 
         context = {
             'form': form,

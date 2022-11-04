@@ -3,15 +3,15 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=80)
+    name = models.CharField(max_length=80)
 
     class Meta:
-        ordering = ['category']
+        ordering = ['name']
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Location(models.Model):
