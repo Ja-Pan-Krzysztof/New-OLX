@@ -35,3 +35,25 @@
 	<p>No content to display</p>
 
 {% endif %}
+<script>
+      let pattern = document.getElementById('nav-search');
+
+      pattern.addEventListener('change', send_pattern);
+
+      function send_pattern() {
+        let data = new FormData();
+
+        data.append('pattern', pattern.value);
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        axios({
+          method: 'POST',
+          url: window.location.origin + '/',
+          data: data
+        })
+          .then(response => {
+            document.getElementById('offers-list').innerHTML = response.data;
+          })
+      }
+
+    </script>
