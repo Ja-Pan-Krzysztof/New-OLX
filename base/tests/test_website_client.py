@@ -12,3 +12,5 @@ class TestWebsiteClient(SimpleTestCase):
         self.assertEqual(response.headers.get('Content-Type'), 'application/json')
 
         #self.assertEqual(response.body, {'signup': 0})
+
+        #self.assertEqual(response.body, {'signup': 0})
