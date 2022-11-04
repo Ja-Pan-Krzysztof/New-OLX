@@ -2,19 +2,13 @@ from .models import Tags, Offer, Location, Category
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.http import JsonResponse
 from django.db.models import Q
 
 from .forms import OfferForm
 
 
-
 def home(request):
-    categories = Category.objects.all()
-
-    if request.method == 'POST':
-        template_name = 'base/offers.html'
     template_name = 'base/home.html'
     categories = Category.objects.all()
 
@@ -22,22 +16,14 @@ def home(request):
         pattern = request.POST['pattern']
 
         offers = Offer.objects.filter(
-            Q(tags__tag__icontains=pattern) |
+            Q(topic__icontains=pattern) |
+            Q(host__username__icontains=pattern) |
             Q(category__name__icontains=pattern) |
-            Q(description__icontains=pattern) |
-            Q(host__username__icontains=pattern)
+            Q(description__icontains=pattern)
         )
 
         context = {
             'categories': categories,
-            'offers': offers
-        }
-
-        return render(request, template_name, context)
-
-    if request.method == 'GET':
-        template_name = 'base/home.html'
-
             'offers': offers,
         }
 
