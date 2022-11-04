@@ -36,34 +36,12 @@
 
 {% endif %}
 
-<script> //Nav search
-        let nav_input = document.getElementById('nav-search');
-        let offer_list = document.getElementById('offer-list');
-
-        nav_input.addEventListener('change', search_pattern);
-
-        function search_pattern() {
-
-          let data = new FormData();
-
-          data.append('pattern', nav_input.value);
-          data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-
-          axios({
-            method: 'POST',
-            headers: {'Content-Type': 'multipart/form-data'},
-            url: '',
-            data: data
-          })
-            .then(response => {
-              offer_list.innerHTML = response.data;
-            })
-        }
-      </script>
 <script>
       let pattern = document.getElementById('nav-search');
+      let pattern_svg = document.getElementById('svg1250');
 
       pattern.addEventListener('change', send_pattern);
+      pattern_svg.addEventListener('click', send_pattern);
 
       function send_pattern() {
         let data = new FormData();
