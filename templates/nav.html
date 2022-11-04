@@ -32,6 +32,7 @@
 </svg>
               </a>
     </center>
+    
   </div>
 
   {% if request.user.is_authenticated %}
@@ -46,7 +47,7 @@
         function send_logout() {
           let data = new FormData();
 
-          data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+          data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
           axios({
           method: 'POST',

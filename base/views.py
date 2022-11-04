@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import JsonResponse
+from django.db.models import Q
 
 from .forms import OfferForm
 
@@ -13,10 +14,13 @@ def home(request):
 
     if request.method == 'POST':
         template_name = 'base/offers.html'
+    template_name = 'base/home.html'
+    categories = Category.objects.all()
+
+    if request.method == 'POST':
         pattern = request.POST['pattern']
 
         offers = Offer.objects.filter(
-            Q(topic__icontains=pattern) |
             Q(tags__tag__icontains=pattern) |
             Q(category__name__icontains=pattern) |
             Q(description__icontains=pattern) |
@@ -33,6 +37,12 @@ def home(request):
     if request.method == 'GET':
         template_name = 'base/home.html'
 
+            'offers': offers,
+        }
+
+        return render(request, template_name='base/offers.html', context=context)
+
+    if request.method == 'GET':
         offers = Offer.objects.all()
 
         context = {
