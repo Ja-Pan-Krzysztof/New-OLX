@@ -64,8 +64,6 @@
 			//data.append('location', locationn.value);
 			data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
-			console.log(image.files[0]);
-
 			axios({
 				method: 'POST',
 				headers: {'Content-Type': 'multipart/form-data'},
