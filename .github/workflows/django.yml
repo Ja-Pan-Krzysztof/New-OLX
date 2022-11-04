@@ -3,13 +3,18 @@ name: Django CI
 on:
   push:
     branches: [ "main" ]
+    
   pull_request:
     branches: [ "main" ]
+    
+  issues:
+    - edited
+    - created
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       max-parallel: 4
       matrix:
