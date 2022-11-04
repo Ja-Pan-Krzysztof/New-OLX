@@ -3,22 +3,41 @@ from .models import Tags, Offer, Location, Category
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.db.models import Q
 
 from .forms import OfferForm
 
 
 def home(request):
     template_name = 'base/home.html'
-
     categories = Category.objects.all()
-    offers = Offer.objects.all()
 
-    context = {
-        'categories': categories,
-        'offers': offers,
-    }
+    if request.method == 'POST':
+        pattern = request.POST['pattern']
 
-    return render(request, template_name, context)
+        offers = Offer.objects.filter(
+            Q(topic__icontains=pattern) |
+            Q(host__username__icontains=pattern) |
+            Q(category__name__icontains=pattern) |
+            Q(description__icontains=pattern)
+        )
+
+        context = {
+            'categories': categories,
+            'offers': offers,
+        }
+
+        return render(request, template_name='base/offers.html', context=context)
+
+    if request.method == 'GET':
+        offers = Offer.objects.all()
+
+        context = {
+            'categories': categories,
+            'offers': offers,
+        }
+
+        return render(request, template_name, context)
 
 
 @login_required
