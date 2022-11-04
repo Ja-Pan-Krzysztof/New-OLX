@@ -8,6 +8,7 @@ from django.db.models import Q
 from .forms import OfferForm
 
 
+
 def home(request):
     template_name = 'base/home.html'
     categories = Category.objects.all()

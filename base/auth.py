@@ -8,6 +8,9 @@ from .forms import SingUpUserForm
 
 import re
 
+# Exceptions
+
+from django.core.exceptions import ObjectDoesNotExist
 
 def login_page(request):
     if request.method == 'POST':
@@ -69,6 +72,16 @@ def sigh_up_page(request):
 
         if not re.fullmatch(re.compile('^[a-zA-Z0-9_.-]+$'), username):
             return JsonResponse({'signup': 4})
+
+        try:
+            if User.objects.get(username=username) is not None:
+                return JsonResponse({'signup': 5})
+
+            if User.objects.get(email=email) is not None:
+                return JsonResponse({'signup': 6})
+
+        except ObjectDoesNotExist:
+            pass
 
         Userr = get_user_model()
         user = Userr.objects.create_user(username=username, password=pass1, email=email)
