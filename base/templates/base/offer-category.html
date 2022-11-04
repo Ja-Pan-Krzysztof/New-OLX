@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	{% if category_bool %}
+		{% include 'base/categories.html' %}
+
+	{% else %}
+		{% include 'base/offers.html' %}
+
+	{% endif %}
+
+	
+
+{% endblock %}%

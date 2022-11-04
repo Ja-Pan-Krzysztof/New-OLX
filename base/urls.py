@@ -1,8 +1,6 @@
 from django.urls import path
 from . import views, auth
 
-from django.conf import settings
-
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -12,10 +10,7 @@ urlpatterns = [
     path('account/logout/', auth.logout_page, name='logout'),
 
     path('add-offer/', views.add_offer, name='add-offer'),
+
+    path('category/', views.offer_category, name='offer-category'),
+    path('category/<str:category_name>', views.offer_category, name='offer-category'),
 ]
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
