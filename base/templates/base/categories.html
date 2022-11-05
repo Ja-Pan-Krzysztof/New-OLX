@@ -1,11 +1,35 @@
 {% if categories %}
-	{% for category in categories %}
-		<ul>
-			<li><a href="{% url 'offer-category' category %}">{{ category }}</a></li>
-		</ul>
-	{% endfor %}
+	<ul>
+		<li><button class="categories-list-button" onclick="show_categories('All')">All</button></li> <br>
+
+		{% for category in categories %}
+			<li>
+				<!-- <a href="{% url 'offer-category' category %}">{{ category }}</a> -->
+				<button class="categories-list-button" onclick="show_categories('{{ category }}')">{{ category }}</button>
+			</li> <br>
+		{% endfor %}
+	</ul>
 
 {% else %}
 	<h1>No content do display.</h1>
 	
 {% endif %}
+
+<script>
+	function show_categories(category) {
+		let data = new FormData();
+
+		data.append('id_category', category);
+		data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+		axios({
+			method: 'POST',
+			url: `${window.location.origin}/category/${category}/`,
+			data: data
+		})
+			.then(response => {
+				document.getElementById('offers-list').innerHTML = response.data;
+			})
+	}
+
+</script>

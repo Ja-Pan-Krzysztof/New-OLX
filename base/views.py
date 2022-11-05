@@ -17,9 +17,9 @@ def home(request):
 
         offers = Offer.objects.filter(
             Q(topic__icontains=pattern) |
-            Q(host__username__icontains=pattern) |
+            Q(description__icontains=pattern) |
             Q(category__name__icontains=pattern) |
-            Q(description__icontains=pattern)
+            Q(host__username__icontains=pattern)
         )
 
         context = {
@@ -102,7 +102,12 @@ def offer_category(request, category_name=None):
         context['category_bool'] = True
 
     if category_name is not None:
-        categories = Offer.objects.filter(category__name=category_name)
+        if category_name == 'All':
+            categories = Offer.objects.all()
+
+        else:
+            categories = Offer.objects.filter(category__name=category_name)
+
         context['offers'] = categories
 
     return render(request, template_name, context)

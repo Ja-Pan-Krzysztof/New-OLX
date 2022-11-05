@@ -151,6 +151,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Render form on website with data from database
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/account/login/'
 
 
 django_on_heroku.settings(locals())
