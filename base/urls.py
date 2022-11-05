@@ -12,5 +12,5 @@ urlpatterns = [
     path('add-offer/', views.add_offer, name='add-offer'),
 
     path('category/', views.offer_category, name='offer-category'),
-    path('category/<str:category_name>', views.offer_category, name='offer-category'),
+    path('category/<str:category_name>/', views.offer_category, name='offer-category'),
 ]
