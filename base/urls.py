@@ -8,6 +8,8 @@ urlpatterns = [
     path('account/login/', auth.login_page, name='login'),
     path('account/sign-up/', auth.sigh_up_page, name='sign-up'),
     path('account/logout/', auth.logout_page, name='logout'),
+    path('account/settings/', auth.account_settings, name='account-settings'),
+    path('account/settings/<str:username>/', auth.account_settings, name='account-settings'),
 
     path('add-offer/', views.add_offer, name='add-offer'),
 
