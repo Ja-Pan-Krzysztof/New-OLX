@@ -1,0 +1,53 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="105mm"
+   height="74mm"
+   viewBox="0 0 105 74"
+   version="1.1"
+   id="svg1276"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="logout.svg">
+    <path
+       id="path1056-5"
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.81779;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       d="m 74.813419,56.066739 c -10.811268,0 -21.622519,0 -32.433785,0 0,-9.848795 7.260553,-17.832819 16.216901,-17.832819 8.956322,0 16.216884,7.984024 16.216884,17.832819 z"
+       sodipodi:nodetypes="ccsc" />
+    <circle
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.81779;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="path1059-2"
+       cx="58.596531"
+       cy="24.902582"
+       r="7.7910385" />
+    <path
+       sodipodi:type="star"
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.12429;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="path1061-2"
+       sodipodi:sides="3"
+       sodipodi:cx="-23.350899"
+       sodipodi:cy="35.501747"
+       sodipodi:r1="7.8578453"
+       sodipodi:r2="3.9289227"
+       sodipodi:arg1="2.1000431"
+       sodipodi:arg2="3.1472407"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m -27.318194,42.284542 0.03843,-6.804985 0.03843,-6.804985 5.874073,3.435778 5.874072,3.435778 -5.912507,3.369207 z"
+       inkscape:transform-center-x="1.9451647"
+       inkscape:transform-center-y="-0.022190979"
+       transform="scale(-1,1)" />
+    <rect
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.12429;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="rect1063-7"
+       width="13.05368"
+       height="1.1517953"
+       x="-41.779579"
+       y="34.989834"
+       transform="scale(-1,1)" />
+</svg>

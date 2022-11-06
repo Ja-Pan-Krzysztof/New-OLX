@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div id="main">
+        <link rel="stylesheet" href="{% static 'css/auth/auth.css' %}">
+        <div id="profile">
+            <header>Your profile</header>
+        </div>
+        <hr>
+        <div>
+            <label for="username">Name</label> <br>
+            <input type="text" id="username" value="{{ user_settings.username }}">
+            <br>
+            <label for="email">Email</label> <br>
+            <input type="text" id="email" value="{{ user_settings.email }}">
+            <br>
+            {% if about_user %}
+                <label for="firstname">First name</label> <br>
+                <input type="text" id="firstname" value="{{ about_user.firstname }}">
+                <br>
+                <label for="lastname">Last name</label> <br>
+                <input type="text" id="lastname" value="{{ about_user.lastname }}">
+                <br>
+                <hr>
+                <br>
+                <label for="publicemail">Public Email</label> <br>
+                <input type="text" id="publicemail" value="{{ about_user.public_email }}">
+                <br>
+                <label for="bio">Bio</label> <br>
+                <input type="text" id="bio" value="{{ about_user.bio }}">
+                <br>
+                <label for="company">Company</label> <br>
+                <input type="text" id="company" value="{{ about_user.company }}">
+                <br>
+                <label for="location">Location</label> <br>
+                <input type="text" id="location" value="{{ about_user.location }}">
+
+            {% else %}
+                <label for="firstname">First name</label> <br>
+                <input type="text" id="firstname" value="">
+                <br>
+                <label for="lastname">Last name</label> <br>
+                <input type="text" id="lastname" value="">
+                <br>
+                <hr>
+                <br>
+                <label for="publicemail">Public Email</label> <br>
+                <input type="text" id="publicemail" value="">
+                <br>
+                <label for="bio">Bio</label> <br>
+                <input type="text" id="bio" value="">
+                <br>
+                <label for="company">Company</label> <br>
+                <input type="text" id="company" value="">
+                <br>
+                <label for="location">Location</label> <br>
+                <input type="text" id="location" value="">
+                <br>
+
+            {% endif %}
+            <button id="update-profile">Update profile</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let update_profile = document.getElementById('update-profile');
+        update_profile.addEventListener('click', send_update_profile);
+
+        function send_update_profile() {
+            let inputs = document.querySelectorAll('#main input');
+            let data = new FormData();
+
+            for(let i = 0; i < inputs.length; i++) {
+                data.append(inputs[i].id, inputs[i].value)
+                
+            }
+            data.append('id_user', '{{ user_settings.id }}')
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+            axios({
+                method: 'POST',
+                url: `${window.location.origin}/account/settings/${"{{ user.username }}"}/`,
+                data: data
+            })
+                .then(response => {
+                    let body = response.data['updateProfile']
+                    if(body == 0) {
+                        window.location = `${window.location.origin}/account/settings/${response.data['redirect']}`;
+                    }
+                })
+
+        }
+
+    </script>
+    
+
+{% endblock content %}

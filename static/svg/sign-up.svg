@@ -1,0 +1,39 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="60px"
+   height="60px"
+   viewBox="0 0 105 74"
+   version="1.1"
+   id="svg1276"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="sigh up.svg">
+    <path
+       id="path1056-5-8"
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.45845;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       d="m 64.995218,42.227582 c -9.432549,0 -18.865098,0 -28.297647,0 0,-8.592813 6.33465,-15.558665 14.148803,-15.558665 7.814194,0 14.148844,6.965852 14.148844,15.558665 z"
+       sodipodi:nodetypes="ccsc" />
+    <circle
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.45845;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="path1059-2-7"
+       cx="50.846375"
+       cy="15.037676"
+       r="6.7974763" />
+    <text
+       xml:space="preserve"
+       id="text1344"
+       style="font-style:normal;font-weight:normal;font-size:8px;line-height:1.15;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1346);fill:#000000;fill-opacity:1;stroke:none;" />
+    <text
+       xml:space="preserve"
+       id="text1350"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1352);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="matrix(1.1879401,0,0,1.2368477,14.520913,-16.413073)"><tspan
+         x="18.925781"
+         y="57.460153"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tahoma;-inkscape-font-specification:Tahoma">NEW</tspan></tspan></text>
+</svg>

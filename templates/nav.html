@@ -2,45 +2,35 @@
 
 <div class="nav">
   <div class="nav-item nav-home">
-    <a href="{% url 'home' %}">HOME</a>
+    <a href="{% url 'home' %}">
+      <div style="width: 60px; float:left;">
+        <img src="{% static 'svg/home.svg' %}" style="float: left; height: 100%; width: 60px;">
+      </div>      
+      <div style="height: 60px; width: calc(100% - 60px); float:left;">
+          <span>Home</span>
+      </div>
+    </a>
   </div>
 
   <div class="nav-item nav-search">
-    <center>
-      <input type="text" placeholder="Search... <Topic / Description / Category / Host>" name="search" id="nav-search">
-        <svg
-   width="21mm"
-   height="14.8mm"
-   viewBox="0 0 105 74"
-   id="svg1250">
-    <circle
-       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.28562;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
-       id="path1045"
-       cx="68.516029"
-       cy="27.930508"
-       r="14.220693" />
-    <rect
-       style="display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.46932;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
-       id="rect1047"
-       width="2.8090255"
-       height="30.548153"
-       x="55.34486"
-       y="-31.018927"
-       transform="rotate(61.800844)" />
-  </g>
-</svg>
-    </center>
-    
+      <div style="display: flex; margin-top: 7.5px;">
+        <input type="text" placeholder="Search... <Topic / Description / Category / Host>" name="search" id="nav-search">
+      </div>
   </div>
 
   {% if request.user.is_authenticated %}
     <div class="nav-item nav-login">
-      <input type="button" id="submit" value="Logout">
+      <div style="display: flex; float: right">
+        <a id="submit"><img src="{% static 'svg/logout.svg' %}" width="60px" height="60px"></a>
+        <a id="settings"><img src="{% static 'svg/settings.svg' %}" width="60px" height="60px"></a>
+      </div>
 
       <script> //Logout Button
         let logout = document.getElementById('submit');
+        let settings = document.getElementById('settings');
 
         logout.addEventListener('click', send_logout);
+        settings.addEventListener('click', send_settings);
 
         function send_logout() {
           let data = new FormData();
@@ -60,13 +50,26 @@
             }
           })
         }
+
+        function send_settings() {
+          window.location = `${window.location.origin}/account/settings/{{ user.username }}`;
+        }  
       </script>
 
     </div>
+
   {% else %}
-    <div class="nav-item nav-login">
-      <a href="{% url 'sign-up' %}">Sign-Up</a>
-      <a href="{% url 'login' %}">Login</a>
+    <div class="nav-item nav-login" style="display: flex">
+      <div class="nav-login-signup" style="font-size: 20px; height: 60px">
+        <a href="{% url 'sign-up' %}"><img src="{% static 'svg/sign-up.svg' %}"></a>
+        <a href="{% url 'sign-up' %}"><span>Sign Up</span></a>
+      </div>
+
+      <div class="nav-login-login" style="font-size: 20px; height: 60px">
+        <a href="{% url 'login' %}"><img src="{% static 'svg/login.svg' %}"></a>
+        <a href="{% url 'login' %}"><span>Login</span></a>
+      </div>
     </div>
+
   {% endif %}
 </div>
