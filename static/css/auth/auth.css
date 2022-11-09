@@ -1,20 +1,22 @@
-#main {
+/* Account/settings */
+
+#account-settings {
 	width: 60%;
 	margin: auto;
 }
 
-#main header {
+#account-settings header {
 	font-size: 2em;
 	padding-left: 5%;
 }
 
-#main label {
+#account-settings label {
 	font-size: 1.2em;
 	margin-bottom: 5px;
 	display: inline-block;
 }
 
-#main input {
+#account-settings input {
 	background-color: #36393d;
 	width: 30em;
 	height: 2em;
@@ -25,13 +27,13 @@
 	padding: 0 1% 0 1%;
 }
 
-#main hr {
+#account-settings hr {
 	margin: 3% 0 3% 0;
 	border: 1px solid #797c83;
 	opacity: 0.5;
 }
 
-#main #update-profile {
+#account-settings #update-profile {
 	display: block;
     min-width: 115px;
     background: #4E9CAF;
@@ -42,3 +44,65 @@
     font-weight: bold;
     line-height: 25px;
 }
+
+/* END */
+
+/* Account/login | Account/sign-up*/
+
+#auth-signup {
+	max-width: 500px;
+	min-height: 400px;
+	margin: 100px auto 0;
+	border: 1px solid white;
+	border-radius: 10px;
+	background-color: #c3d2f0;
+}
+
+#auth-login {
+	max-width: 500px;
+	margin: 100px auto 0;
+	border: 1px solid white;
+	border-radius: 10px;
+	background-color: #c3d2f0;
+}
+
+.auth-login-top {
+	width: 100%;
+	min-height: 60px;
+}
+
+.auth-login-top > header {
+	padding: 20px;
+	color: #334362;
+	text-align: center;
+	font-size: 30px;
+}
+
+.auth-login-form {
+	width: 420px;
+	margin: 20px auto 10px;
+}
+
+.auth-login-form > label {
+	color: #334362;
+	font-family: monospace;
+	font-size: 13px;
+}
+
+.auth-login-form > button {
+	margin: 30px auto 40px;
+	width: 100%;
+}
+
+.auth-login-footer {
+	border-top: 1px solid white;
+}
+
+.auth-login-footer > * {
+	display: inline-block;
+	padding-top: 6px;
+	color: #334362;
+	font-size: 19px;
+}
+
+/* END */

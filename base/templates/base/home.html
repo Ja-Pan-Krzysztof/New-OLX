@@ -20,8 +20,8 @@
   <div>
     {% if request.user.is_authenticated %}
       <div>
-        <span class="add-offer-button" style="display: inline-block">Hi {{ user.get_username }} 👋</span>
-        <span><a class="add-offer-button" href="{% url 'add-offer' %}" style="display: inline-block">Add new offer</a></span>
+        <span class="main-button" style="display: inline-block; height: 25px">Hi {{ user.get_username }} 👋</span>
+        <span><a class="main-button" href="{% url 'add-offer' %}" style="display: inline-block; height: 25px">Add new offer</a></span>
       </div>
     {% endif %}
 
