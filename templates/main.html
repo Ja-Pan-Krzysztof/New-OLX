@@ -8,27 +8,20 @@
    <title>New OLX</title>
    <link rel="stylesheet" href="{% static 'css/index.css' %}">
    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script type="text/javascript" src="{% static 'js/head.js' %}"></script>
 </head>
 <body>
 
    {% include 'nav.html' %}
 
-   <div id='messages'>
-      {% if messages %}
-         {% for mess in messages %}
-            {{ mess }}
-         
-         {% endfor %}
-
-      {% endif %}
-   </div>
+   <div id='messages'></div>
 
 
    {% block content %}
 
 	{% endblock %}
 
-   <script src="{% static 'js/index.js' %}"></script>
+   <script src="{% static 'js/body_end.js' %}"></script>
 
 </body>
 </html>

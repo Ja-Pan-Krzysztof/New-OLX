@@ -55,14 +55,14 @@
 						.then(response => {
 							body = response.data['signup'];
 
-							console.log(body)
-
-							if(body == 1) {
-								div_message.innerHTML = 'Invalid data';
+							if(body != 0) {
+								div_message.setAttribute('style', bad_messages);
+								div_message.innerHTML = `<p>${body}</p>`;
 							}
 
 							if(body == 0) {
-								div_message.innerHTML = 'Success';
+								div_message.setAttribute('style', well_messages);
+								div_message.innerHTML = `<p>Success</p>`;
 								window.location = '/';
 							}
 						})

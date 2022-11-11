@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, get_user_model, decorators
-from django.contrib import messages
 from django.http import JsonResponse
 
 from .forms import SingUpUserForm
@@ -31,7 +30,7 @@ def login_page(request):
             User.objects.get(username=username)
 
         except ObjectDoesNotExist:
-            return JsonResponse({'login': 2})
+            return JsonResponse({'login': 'Username does not exist.'})
 
         user = authenticate(request, username=username, password=password)
 
@@ -41,13 +40,10 @@ def login_page(request):
             return JsonResponse({'login': 0})
 
         else:
-            messages.error(request, '')
-
-            return JsonResponse({'login': 1})
+            return JsonResponse({'login': 'Invalid username or password.'})
 
     if request.method == 'GET':
         if request.user.is_authenticated:
-            messages.info(request, 'success')
             return redirect('home')
 
         template_name = 'base/auth/login.html'
@@ -74,21 +70,31 @@ def sigh_up_page(request):
         pass1 = request.POST['password1']
         pass2 = request.POST['password2']
 
-        if not pass1 == pass2:
-            return JsonResponse({'signup': 2})
-
-        if not email_re(email):
-            return JsonResponse({'signup': 3})
+        if len(username) < 1:
+            return JsonResponse({'signup': 'Username is too short.'})
 
         if not username_re(username):
-            return JsonResponse({'signup': 4})
+            return JsonResponse({'signup': 'Invalid username.'})
+
+        if not email_re(email):
+            return JsonResponse({'signup': 'Invalid email.'})
+
+        if len(pass1) < 8:
+            return JsonResponse({'signup': 'Password is too short.'})
+
+        if not pass1 == pass2:
+            return JsonResponse({'signup': 'Passwords are not same.'})
 
         try:
             if User.objects.get(username=username) is not None:
-                return JsonResponse({'signup': 5})
+                return JsonResponse({'signup': 'Username exist.'})
 
+        except ObjectDoesNotExist:
+            pass
+
+        try:
             if User.objects.get(email=email.lower()) is not None:
-                return JsonResponse({'signup': 6})
+                return JsonResponse({'signup': 'Email exist.'})
 
         except ObjectDoesNotExist:
             pass
