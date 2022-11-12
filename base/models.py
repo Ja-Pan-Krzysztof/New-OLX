@@ -42,7 +42,7 @@ class Offer(models.Model):
     tags = models.ManyToManyField(Tags)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=False)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(null=True, upload_to='offer/')
+    image = models.ImageField(null=True, upload_to='offer/', blank=True, default=None)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
 
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)

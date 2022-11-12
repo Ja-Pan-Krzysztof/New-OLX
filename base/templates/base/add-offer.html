@@ -1,41 +1,27 @@
 {% extends 'main.html' %}
 
 {% block content %}
-	<div class="add-offer-list">
-		
-
-	<form action="" method="POST" enctype="multipart/form-data">
+	<div class="add-offer-list" style="margin-top: 1%">
+	{# <form action="" method="POST" enctype="multipart/form-data"> #}
 		{% csrf_token %}
 		<div class="offer-titles">
-			<div><header>Title</header></div>
-			<hr><br>
-			<div><header>Cagetory</header></div>
-			<hr><br>
-			<div><header>Description</header></div>
-			<hr><br>
-			<div><header>Image</header></div>
-			<hr><br>
-			<div><header>Price</header></div>
-			<hr><br>
+			{% for field in form.fields %}
+				<div><header>{{ field.capitalize }}</header></div>
+				<hr><br>
+			{% endfor %}
 		</div>
 
 		<div class="offer-values">
-			<div>{{ form.topic }}</div>
-			<hr><br>
-			<div>{{ form.category }}</div>
-			<hr><br>
-			<div>{{ form.description }}</div>
-			<hr><br>
-			<div>{{ form.image }}</div>
-			<hr><br>
-			<div>{{ form.price }}</div>
-			<hr><br>
+			{% for field in form %}
+				<div>{{ field }}</div>
+				<hr><br>
+			{% endfor %}
 		</div>
 
-		<div style="clear: both;">
-			<input type="submit" id="add_offer" value="Add Offer">
+		<div style="clear: both; width: 80%; float: right">
+			<input type="submit" id="add_offer" value="Add Offer" class="main-button">
 		</div>
-	</form>
+	{# </form> #}
 
 	</div>
 	
@@ -50,48 +36,60 @@
 		//let tags = document.getElementById('id_tags');
 		//let locationn = document.getElementById('id_location');
 
-		//submit.addEventListener('click', send_addOffer);
+		submit.addEventListener('click', send_addOffer);
 
 		function send_addOffer() {
-			let data = new FormData();
+			if(topic.value == '' || category.value == '' || price.value == '') {
+				let req_f = document.querySelectorAll('input[required], select[required]');
 
-			data.append('topic', topic.value);
-			data.append('category', category.value);
-			data.append('description', description.value);
-			data.append('image', image.files[0].name);
-			data.append('price', price.value);
-			//data.append('tags', tags.value);
-			//data.append('location', locationn.value);
-			data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+				div_message.setAttribute('style', bad_messages);
+				div_message_c.innerHTML = `<p>Fill in the required fields.</p>`;
 
-			axios({
-				method: 'POST',
-				headers: {'Content-Type': 'multipart/form-data'},
-				url: '',
-				data: data
-			})
+				for(let i = 0; i < req_f.length; i++) {
+					req_f[i].setAttribute('style', require_inputs);
+				}
+
+				
+			}
+
+			else {
+				let data = new FormData();
+
+				data.append('image', image.files[0]);
+
+				data.append('topic', topic.value);
+				data.append('category', category.value);
+				data.append('description', description.value);
+				data.append('price', price.value);
+				//data.append('tags', tags.value);
+				//data.append('location', locationn.value);
+				data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+				axios({
+					method: 'POST',
+					url: `${window.location.origin}/add-offer/`,
+					data: data,
+					headers: {
+						'Content-Type': image.type
+					}
+
+				})
 				.then(response => {
 					body = response.data['addoffer'];
-					if(body == 5) {
-						div_message.innerHTML = 'Bad Location.';
+					
+					if(body != 0) {
+						div_message.setAttribute('style', bad_messages);
+						div_message_c.innerHTML = `<p>${body}</p>`;
 					}
-					if(body == 4) {
-						div_message.innerHTML = 'Topic is too long.';
-					}
-					if(body == 3) {
-						div_message.innerHTML = 'Bad Category';
-					}
-					if(body == 2) {
-						div_message.innerHTML = 'Bad tags';
-					}
-					if(body == 1) {
-						div_message.innerHTML = 'Invalid data';
-					}
+
 					if(body == 0) {
-						div_message.innerHTML = 'Success';
-						//window.location = '/';
+						div_message.setAttribute('style', well_messages);
+						div_message_c.innerHTML = '<p>Success</p>';
+						window.location = '/';
 					}
-				})
+				});
+			}
+			
 		}
 	</script>
 

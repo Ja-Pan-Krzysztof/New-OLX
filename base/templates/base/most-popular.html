@@ -1,9 +1,9 @@
 {% for offer in offers|dictsort:"views"|slice:":5" %}
 		{% if offer.image %}
-		    <div class="offer-list offer-list-img" style="background-image: url('{{ request.scheme }}://{{ request.get_host }}/media/{{ offer.image }}')">
+		    <div class="offer-list offer-list-img" style="background-image: url('{{ request.scheme }}://{{ request.get_host }}/media/{{ offer.image }}'); max-width: 355px;">
 
 		{% else %}
-			<div class="offer-list">
+			<div class="offer-list offer-list-img" style="background-image: url('{{ request.scheme }}://{{ request.get_host }}/media/no-image.png'); max-width: 355px;">
 		
 		{% endif %}
 		<header>{{ offer.topic }}</header>

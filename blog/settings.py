@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-import django_on_heroku
+#import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -154,4 +154,4 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login/'
 
 
-django_on_heroku.settings(locals())
+#django_on_heroku.settings(locals())

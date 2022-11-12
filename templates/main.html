@@ -14,7 +14,10 @@
 
    {% include 'nav.html' %}
 
-   <div id='messages'></div>
+   <div id='messages'>
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <div></div>
+   </div>
 
 
    {% block content %}

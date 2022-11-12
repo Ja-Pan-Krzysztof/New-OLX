@@ -7,6 +7,9 @@ from django.db.models import Q
 
 from .forms import OfferForm
 
+#exceptions
+from django.utils.datastructures import MultiValueDictKeyError
+
 
 def home(request):
     template_name = 'base/home.html'
@@ -45,8 +48,6 @@ def add_offer(request):
     template_name = 'base/add-offer.html'
 
     if request.method == 'POST':
-        form = OfferForm(request.POST, request.FILES)
-
         #tags = request.POST['tags']
         category = request.POST['category']
         topic = request.POST['topic']
@@ -62,7 +63,7 @@ def add_offer(request):
             Category.objects.get(id=category)
 
         except:
-            return JsonResponse({'addoffer': 3})
+            return JsonResponse({'addoffer': 'Bad Category'})
 
         #try:
         #    Location.objects.get(id=location)
@@ -71,16 +72,32 @@ def add_offer(request):
         #    return JsonResponse({'addoffer': 5})
 
         if len(topic) > 50:
-            return JsonResponse({'addoffer': 4})
+            return JsonResponse({'addoffer': 'Topic is too long.'})
 
-        if form.is_valid():
-            new_offer = form.save(commit=False)
-            new_offer.host = request.user
-            new_offer.save()
+        try:
+            offer = Offer(
+                host=request.user,
+                topic=topic,
+                category=Category.objects.get(id=4),
+                description=request.POST['description'],
+                image=request.FILES['image'],
+                price=request.POST['price']
+            )
+            offer.save()
 
-            return redirect('home')
+        except MultiValueDictKeyError:
+            offer = Offer(
+                host=request.user,
+                topic=topic,
+                category=Category.objects.get(id=4),
+                description=request.POST['description'],
+                image=None,
+                price=request.POST['price']
+            )
+            offer.save()
 
-        return JsonResponse({'addoffer': 1})
+        finally:
+            return JsonResponse({'addoffer': 0})
 
     if request.method == 'GET':
         form = OfferForm()
