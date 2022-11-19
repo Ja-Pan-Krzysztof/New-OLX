@@ -1,0 +1,35 @@
+/*Offers*/
+
+.offer-list-img {
+	background-position: center;
+	background-size: cover;
+	color: white;
+}
+
+.offer-list img {
+	width: 150px;
+	height: 150px;
+	border-radius: 10px 0 0 10px;
+}
+
+.offer-list-left {
+	width: 150px;
+	height: 150px;
+}
+
+.offer-list-right {
+	position: relative;
+	top: -40px;
+	width: 70%;
+	height: 148px;
+}
+
+.offer-list-right header {
+	text-align:center;
+	font-size: 20px;
+	font-weight: bold;	
+}
+
+.offer-list-item {
+	display: inline-block;
+}

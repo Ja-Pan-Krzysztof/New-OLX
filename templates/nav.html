@@ -56,6 +56,30 @@
         }  
       </script>
 
+      <script>
+      let pattern = document.getElementById('nav-search');
+      let pattern_svg = document.getElementById('svg1250');
+
+      pattern.addEventListener('change', send_pattern);
+      //pattern_svg.addEventListener('click', send_pattern);
+
+      function send_pattern() {
+        let data = new FormData();
+
+        data.append('pattern', pattern.value);
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        axios({
+          method: 'POST',
+          url: window.location.origin + '/',
+          data: data
+        })
+          .then(response => {
+            document.getElementById('offers-list').innerHTML = response.data;
+          })
+      }
+    </script>
+
     </div>
 
   {% else %}

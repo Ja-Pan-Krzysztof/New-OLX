@@ -2,12 +2,13 @@ from .models import Tags, Offer, Location, Category
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views import generic as gc
 from django.http import JsonResponse
 from django.db.models import Q
 
 from .forms import OfferForm
 
-#exceptions
+# exceptions
 from django.utils.datastructures import MultiValueDictKeyError
 
 
@@ -48,15 +49,15 @@ def add_offer(request):
     template_name = 'base/add-offer.html'
 
     if request.method == 'POST':
-        #tags = request.POST['tags']
+        # tags = request.POST['tags']
         category = request.POST['category']
         topic = request.POST['topic']
-        #location = request.POST['location']
+        # location = request.POST['location']
 
-        #try:
+        # try:
         #    Tags.objects.get(id=tags)
 
-        #except:
+        # except:
         #    return JsonResponse({'addoffer': 2})
 
         try:
@@ -65,10 +66,10 @@ def add_offer(request):
         except:
             return JsonResponse({'addoffer': 'Bad Category'})
 
-        #try:
+        # try:
         #    Location.objects.get(id=location)
 
-        #except:
+        # except:
         #    return JsonResponse({'addoffer': 5})
 
         if len(topic) > 50:
@@ -128,3 +129,20 @@ def offer_category(request, category_name=None):
         context['offers'] = categories
 
     return render(request, template_name, context)
+
+
+class OfferId(gc.DetailView):
+    template_name = 'base/offer.html'
+    model = Offer
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['offer'] = Offer.objects.get(id=self.object.id)
+
+        return context
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 
 {% block content %}
 
@@ -27,6 +27,24 @@
 
     <div id="offers-list">
       {% include 'base/offers.html' %}
+
+      <!-- <script>
+    let offers_list = document.querySelectorAll('.offer-list');
+
+    for(let i = 0; i < offers_list.length; i++) {
+      offers_list[i].addEventListener('click', () => {
+        let id_offer = offers_list[i].getAttribute('value');
+
+        axios({
+          method: 'GET',
+          url: `${window.location.origin}/offer/${id_offer}`
+        })
+          .then(response => {
+            document.getElementsByClassName('div-main')[0].innerHTML = `${response.data}`;
+          })
+      });
+    }
+  </script> -->
     </div>
   </div>
 

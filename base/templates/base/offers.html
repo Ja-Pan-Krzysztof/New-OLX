@@ -1,8 +1,11 @@
 {% load static %}
 
 {% if offers %}
+	<link rel="stylesheet" href="{% static 'css/offers.css' %}">
+	
 	{% for offer in offers %}
-		<div class="offer-list">
+		<a href="{% url 'offer-id' offer.id %}">
+			<div class="offer-list" value="{{ offer.id }}">
 			<div class="offer-list-left offer-list-item">
 				{% if offer.image %}
 					<img src="{{ request.scheme }}://{{ request.get_host }}/media/{{ offer.image }}">
@@ -29,6 +32,7 @@
 				</div>
 			</div>
 		</div>
+		</a>
 	{% endfor %}
 
 {% else %}
@@ -36,27 +40,4 @@
 
 {% endif %}
 
-<script>
-      let pattern = document.getElementById('nav-search');
-      let pattern_svg = document.getElementById('svg1250');
 
-      pattern.addEventListener('change', send_pattern);
-      //pattern_svg.addEventListener('click', send_pattern);
-
-      function send_pattern() {
-        let data = new FormData();
-
-        data.append('pattern', pattern.value);
-        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-
-        axios({
-          method: 'POST',
-          url: window.location.origin + '/',
-          data: data
-        })
-          .then(response => {
-            document.getElementById('offers-list').innerHTML = response.data;
-          })
-      }
-
-    </script>
