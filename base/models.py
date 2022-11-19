@@ -63,7 +63,7 @@ class Offer(models.Model):
 
 
 class AboutUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
     firstname = models.CharField(max_length=255, null=True)
     lastname = models.CharField(max_length=255, null=True)
     public_email = models.EmailField(null=True)
